@@ -1,13 +1,19 @@
-/* Variáveis de Cores */
+
 :root {
-    --bg-main: #0A0E1A; /* Fundo principal escuro */
-    --color-text: #F0F0F0; /* Texto principal claro */
-    --color-secondary-text: #B0B0B0; /* Texto secundário */
-    --color-dark-card: #181C2A; /* Fundo dos cards escuros */
-    --highlight-color: #E53935; /* Cor principal de destaque (Vermelho) */
-    --highlight-orange: #FF8F00; /* Destaque Laranja */
-    --highlight-yellow: #FFC107; /* Destaque Amarelo */
-    --color-border: #333; /* Cor de linha/borda sutil */
+    /* BASE - Fundo Quente (Quase Branco) + Texto Escuro de Alta Legibilidade */
+    --bg-main: #F9F9F9; /* Fundo principal: Cinza Quente, ultra-claro */
+    --color-text: #28282B; /* Texto principal: Carvão Escuro (Sólido e Profissional) */
+    --color-secondary-text: #6B6B6B; /* Texto secundário (Cinza médio) */
+    --color-dark-card: #FFFFFF; /* Fundo dos cards/seções (Branco Puro para POP) */
+    
+    /* DESTAQUE - Cobre Suave e Carvão (Confiabilidade e Chamada para Ação) */
+    --highlight-color: #28282B; /* Cor principal de destaque (Carvão Escuro/Estabilidade) */
+    --highlight-secondary: #B85F3B; /* Cor Secundária de destaque (Cobre/Terracota Suave para CTAs) */
+    --highlight-yellow: #FFC300; /* Destaque Amarelo (mantido para ícones/pontos específicos) */
+    
+    /* Cores Específicas de Profundidade */
+    --bg-section-break: #EFEFEF; /* Fundo mais escuro para quebrar o ritmo (Cinza Neutro Claro) */
+    --color-border: #E0E0E0; /* Cor de linha/borda suave e clara */
 }
 
 /* Estilos Globais e Reset Básico */
@@ -18,14 +24,15 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-main);
-    color: var(--color-text);
+    /* Utilizando uma pilha de fontes moderna para um look mais clean */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-main); /* Novo fundo sutil e quente */
+    color: var(--color-text); 
     line-height: 1.6;
     min-height: 100vh;
 }
 
-/* Aplicação do Gradiente de Fundo */
+/* Aplicação da Cor de Fundo em todo o viewport */
 body::before {
     content: "";
     position: fixed;
@@ -34,9 +41,7 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: -1;
-    /* Gradiente sutil do azul escuro para o vermelho escuro/preto */
-    background-image: linear-gradient(135deg, rgba(16, 21, 38, 1) 0%, rgba(51, 10, 10, 1) 100%);
-    opacity: 0.9;
+    background-color: var(--bg-main); 
 }
 
 strong {
@@ -51,79 +56,100 @@ strong {
     padding: 20px 40px;
 }
 
-/* --- Cabeçalho (Header) --- */
+/* --- Cabeçalho (Header) - AGORA SEM COR E SEM SOMBRA --- */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 30px;
     padding-bottom: 30px;
+    background-color: var(--bg-main); /* Fundo igual ao corpo para parecer 'sem cor' */
+    box-shadow: none; /* Remove a sombra */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s;
 }
+
+/* Opcional: Adiciona uma sombra sutil ao rolar, se desejar */
+.header.scrolled {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
 
 .logo {
     font-size: 1.2em;
     font-weight: bold;
-    color: var(--color-text);
+    color: var(--highlight-color); /* Carvão Escuro */
 }
 
 .nav a {
-    color: var(--color-secondary-text);
+    color: var(--color-text); 
     text-decoration: none;
     margin-right: 20px;
+    transition: color 0.3s;
 }
 
-/* Botões */
+.nav a:hover {
+    color: var(--highlight-secondary); /* Cobre Suave */
+}
+
+/* Botões - Cores e Raio de Borda (8px) */
 .btn-primary {
     background-color: transparent;
     color: var(--color-text);
     border: 1px solid var(--color-text);
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 8px; 
     cursor: pointer;
     font-size: 0.9em;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: var(--color-text);
-    color: var(--bg-main);
+    background-color: var(--highlight-color); /* Carvão Escuro */
+    color: #FFFFFF; 
+    border-color: var(--highlight-color);
 }
 
+/* Botão de Ação principal (Cobre Suave) */
 .btn-action {
     display: inline-block;
-    background-color: var(--highlight-color);
-    color: var(--color-text);
+    background-color: var(--highlight-secondary); /* Cobre Suave */
+    color: #FFFFFF; /* Texto branco para alto contraste */
     text-decoration: none;
     padding: 12px 25px;
-    border-radius: 5px;
+    border-radius: 8px; 
     font-weight: bold;
     margin-top: 20px;
     transition: background-color 0.3s;
 }
 
 .btn-action:hover {
-    background-color: #f75d59;
+    background-color: #A35031; /* Cobre um pouco mais escuro no hover */
 }
 
-.btn-secondary { /* Botão para seção Sobre Nós */
-    background-color: var(--color-text);
-    color: var(--bg-main);
+/* Botão Secundário (Carvão Escuro) */
+.btn-secondary { 
+    background-color: var(--highlight-color); /* Carvão Escuro */
+    color: #FFFFFF;
     padding: 10px 20px;
+    border-radius: 8px; 
 }
 
 .btn-secondary:hover {
-    background-color: #ddd;
-    color: var(--bg-main);
+    background-color: #1A1A1D;
+    color: #FFFFFF;
 }
 
 .btn-small-action {
     display: inline-block;
-    background-color: var(--color-text);
-    color: var(--highlight-color);
+    background-color: var(--highlight-color); /* Carvão Escuro */
+    color: #FFFFFF; 
     text-decoration: none;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 8px; 
     font-weight: bold;
     margin-top: 15px;
     font-size: 0.9em;
@@ -131,7 +157,7 @@ strong {
 }
 
 .btn-small-action:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 /* --- Seção Hero e Cards --- */
@@ -156,25 +182,22 @@ strong {
 
 .card {
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 12px; 
     min-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
-    /* Efeito de Hover/Micro-interação */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    background-color: var(--color-dark-card); /* Cartões PURE WHITE */
+    border: 1px solid var(--color-border); 
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.card-dark {
-    background-color: var(--color-dark-card);
-    border: 1px solid #303040;
+    /* Sombra mais clara e difusa para POP PREMIUM */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
 }
 
 .card-dark:hover {
@@ -182,7 +205,7 @@ strong {
 }
 
 .card-tag {
-    color: var(--highlight-color);
+    color: var(--highlight-secondary); /* Cobre Suave */
     font-size: 0.7em;
     font-weight: bold;
     letter-spacing: 1px;
@@ -194,21 +217,23 @@ strong {
     font-weight: normal;
 }
 
-/* Card de Destaque (Vermelho com Gradiente) */
+/* Card de Destaque (Carvão Escuro com Gradiente) */
 .card-highlight {
-    background: linear-gradient(135deg, rgba(235, 76, 76, 0.9) 0%, rgba(200, 50, 50, 0.9) 100%);
+    background: linear-gradient(135deg, var(--highlight-color) 0%, #1A1A1D 100%);
     position: relative;
     overflow: hidden;
     min-height: 300px;
+    border-radius: 12px; 
+    border: none !important; /* Remove borda no card de destaque */
 }
 
 .card-highlight:hover {
-    box-shadow: 0 10px 20px rgba(255, 69, 0, 0.4);
+    box-shadow: 0 15px 35px rgba(40, 40, 43, 0.4); /* Sombra com cor do destaque */
 }
 
 /* --- Refinamento do Card de Destaque --- */
 .card-highlight-text {
-    color: var(--color-text); /* Cor clara para alto contraste */
+    color: #FFFFFF; 
     font-size: 1.2em;
     margin-bottom: 20px;
 }
@@ -223,23 +248,22 @@ strong {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.2); 
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--color-text);
+    color: #FFFFFF;
     font-size: 1.5em;
     transition: background-color 0.3s ease;
 }
 
 .icon-circle:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .small-cards {
     display: none;
 }
-/* FIM Refinamento Card Destaque */
 
 
 /* --- Separador Visual (Linha) --- */
@@ -261,9 +285,9 @@ hr {
     margin: 0 auto;
     text-align: center;
     padding: 40px;
-    background-color: var(--color-dark-card);
-    border-radius: 10px;
-    border: 1px solid #303040;
+    background-color: var(--color-dark-card); /* Branco Puro */
+    border-radius: 12px; 
+    border: 1px solid var(--color-border);
 }
 
 .about-us-content h2 {
@@ -301,15 +325,17 @@ hr {
 .affiliate-card {
     flex: 1;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 12px; 
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    background-color: var(--color-dark-card);  
+    border: 1px solid var(--color-border);
 }
 
 .affiliate-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
 }
 
 .affiliate-card .icon {
@@ -328,37 +354,34 @@ hr {
     color: var(--color-secondary-text);
 }
 
-/* Cores específicas dos cards de vantagens */
-.affiliate-card-red {
-    background-color: #351515;
-    border: 1px solid var(--highlight-color);
-}
+/* Cores específicas dos cards de vantagens (Fundo claro, ícones coloridos) */
 .affiliate-card-red .icon {
-    color: var(--highlight-color);
-}
-
-.affiliate-card-orange {
-    background-color: #352515;
-    border: 1px solid var(--highlight-orange);
+    color: var(--highlight-color); /* Carvão Escuro */
 }
 .affiliate-card-orange .icon {
-    color: var(--highlight-orange);
+    color: var(--highlight-secondary); /* Cobre Suave */
 }
 
-.affiliate-card-yellow {
-    background-color: #353015;
-    border: 1px solid var(--highlight-yellow);
-}
 .affiliate-card-yellow .icon {
     color: var(--highlight-yellow);
 }
 
 
-/* --- Seção de Testemunhos --- */
+/* --- Seção de Testemunhos - QUEBRA VISUAL COM FUNDO NEUTRO CLARO --- */
 .testimonials-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     text-align: center;
+    background-color: var(--bg-section-break); 
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* Centraliza o conteúdo dentro da seção colorida */
+.testimonials-section > .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px; 
 }
 
 .testimonials-section h2 {
@@ -376,18 +399,18 @@ hr {
 .testimonial-card {
     flex: 1;
     max-width: 550px;
-    background-color: var(--color-dark-card);
+    background-color: var(--color-dark-card); 
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 12px; 
     text-align: left;
-    border: 1px solid #303040;
+    border: 1px solid var(--color-border);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
 }
 
 .testimonial-card p {
@@ -402,9 +425,9 @@ hr {
 }
 
 .avatar-placeholder {
+    background-color: var(--highlight-secondary); /* Cobre Suave */
     width: 40px;
     height: 40px;
-    background-color: #666;
     border-radius: 50%;
     margin-right: 15px;
 }
@@ -417,7 +440,7 @@ hr {
 
 .author-title {
     font-size: 0.8em;
-    color: var(--highlight-color);
+    color: var(--highlight-color); /* Carvão Escuro */
 }
 
 /* --- SEÇÃO: Informações de Contato --- */
@@ -443,27 +466,26 @@ hr {
 .contact-card {
     flex: 1;
     max-width: 350px;
-    background-color: var(--color-dark-card);
+    background-color: var(--color-dark-card); /* Cartão PURE WHITE */
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 12px; 
     text-align: center;
-    border: 1px solid #303040;
+    border: 1px solid var(--color-border);
     
-    /* Hover e Animação */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
 }
 
 .contact-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
 }
 
 .icon-contact {
     font-size: 2.5em;
     margin-bottom: 15px;
     display: block;
-    color: var(--highlight-color); /* Cor principal de destaque */
+    color: var(--highlight-color); /* Carvão Escuro */
 }
 
 .contact-card h3 {
@@ -480,26 +502,26 @@ hr {
 .btn-contact {
     display: inline-block;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 8px; 
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9em;
     transition: opacity 0.3s;
-    background-color: var(--highlight-color);
-    color: var(--color-text);
+    background-color: var(--highlight-color); /* Carvão Escuro */
+    color: #FFFFFF; 
 }
 
 .btn-contact:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 /* Cores de destaque para os cards de contato (bordas/ícones) */
 .contact-card-whatsapp .icon-contact { color: #25D366; }
-.contact-card-email .icon-contact { color: var(--highlight-color); }
+.contact-card-email .icon-contact { color: var(--highlight-secondary); } /* Cobre */
 .contact-card-instagram .icon-contact { color: #C13584; }
 
 .contact-card-whatsapp { border-color: #25D366; }
-.contact-card-email { border-color: var(--highlight-color); }
+.contact-card-email { border-color: var(--highlight-secondary); } /* Cobre */
 .contact-card-instagram { border-color: #C13584; }
 
 
@@ -512,7 +534,7 @@ hr {
 
 .final-cta-section .icon-big {
     font-size: 2.5em;
-    color: var(--highlight-color);
+    color: var(--highlight-secondary); 
     margin-bottom: 20px;
     display: block;
 }
@@ -532,6 +554,7 @@ hr {
     padding-top: 20px;
     padding-bottom: 20px;
     text-align: left;
+    background-color: var(--color-dark-card); 
 }
 
 .footer-links a, .footer-links span {
@@ -559,7 +582,7 @@ hr {
 }
 
 .footer-social a:hover {
-    color: var(--highlight-color);
+    color: var(--highlight-secondary); 
 }
 
 
@@ -588,9 +611,11 @@ hr {
 }
 
 /* Base: Esconde os elementos antes da animação */
-.anim-slide-up, .card, .affiliate-card, .testimonial-card, .btn-action, .icon-big, .header, .about-us-content, .contact-card {
+.anim-slide-up, .card, .affiliate-card, .testimonial-card, .btn-action, .icon-big, .about-us-content, .contact-card {
     opacity: 0;
 }
+.header { opacity: 1; } 
+
 
 /* Animações com Slide Up */
 .anim-slide-up.in-view, 
@@ -633,8 +658,7 @@ hr {
 .btn-action.in-view {
     animation: slideUp 0.6s ease-out forwards;
 }
-.icon-big.in-view,
-.header.in-view {
+.icon-big.in-view {
     animation: fadeIn 0.6s ease-out forwards;
 }
 
@@ -681,6 +705,8 @@ hr {
     .header {
         flex-direction: column;
         gap: 15px;
+        position: relative; 
+        box-shadow: none;
     }
 
     .nav {
